@@ -1,6 +1,18 @@
 var vp = document.getElementById("villaplatzi");
 var papel = vp.getContext("2d");
-var cantidad = aleatorio(1,50);
+var cantidadVacas = aleatorio(1,10);
+var cantidadCerdos = aleatorio(1,10);
+
+var teclas = 
+{
+    UP: 38,
+    DOWN: 40,
+    RIGTH: 39,
+    LEFTH: 37
+};
+document.addEventListener("keydown", dibujar);
+var X = 300;
+var Y = 420;
 
 var fondo =
 {
@@ -12,6 +24,16 @@ var vaca =
     url : "vaca.png",
     cargaOk: false
 }
+var pollo = 
+{
+    url : "pollo.png",
+    cargaOk: false
+}
+var cerdo =
+{
+    url: "cerdo.png",
+    cargaOk: false
+}
 
 fondo.imagen = new Image();
 fondo.imagen.src = fondo.url;
@@ -21,12 +43,13 @@ vaca.imagen = new Image();
 vaca.imagen.src = vaca.url;
 vaca.imagen.addEventListener("load", cargarVacas);
 
-//var pollo = new Image();
-//pollo.src = "pollo.png";
-//pollo.addEventListener("load", dcargarPollo);
-//var cerdo = new Image();
-//cerdo.src = "cerdo.png";
-//cerdo.addEventListener("load", dcargarCerdo);
+pollo.imagen = new Image();
+pollo.imagen.src = pollo.url;
+pollo.imagen.addEventListener("load", cargarPollo);
+
+cerdo.imagen = new Image();
+cerdo.imagen.src = cerdo.url;
+cerdo.imagen.addEventListener("load", cargarCerdos);
 
 function cargarFondo()
 {
@@ -38,28 +61,46 @@ function cargarVacas()
     vaca.cargaOk = true;
     dibujar();
 }
-
-//function dibujarpollo()
-//{
-//    papel.drawImage(pollo,200,200);
-//}
-//function dibujarcerdo()
-//{
- //   papel.drawImage(cerdo, 350,200);
-//}
-function dibujar()
+function cargarCerdos()
 {
-    if (fondo.cargaOk) {
-        papel.drawImage(fondo.imagen, 0, 0);
-    }
+    cerdo.cargaOk = true;
+    dibujar();
+}
+function cargarPollo()
+{
+    pollo.cargaOk = true;
+    dibujar();
+}
+
+/*function dibujarPollo(evento)
+{
+        
+}*/
+function dibujar(evento)
+{
     if (fondo.cargaOk) 
     {
-        for (i = 0; i < cantidad; i++)
+        papel.drawImage(fondo.imagen, 0, 0);
+        for (i = 0; i < cantidadVacas; i++)
         {
             var x = (aleatorio(0, 7) * 60);
             var y = (aleatorio(0, 7) * 60);
             papel.drawImage(vaca.imagen, x, y);
-        }   
+            
+        }
+        for (i = 0 ; i < cantidadCerdos; i ++)
+        {
+            var x = (aleatorio(0, 7) * 60);
+            var y = (aleatorio(0, 7) * 60);
+            papel.drawImage(cerdo.imagen, x, y);
+        }
+        var movimiento = 20;
+        switch (evento.keyCode) {
+        case teclas.UP: papel.drawImage(pollo.imagen, X, Y - movimiento); Y = Y - movimiento; break;
+        case teclas.DOWN: papel.drawImage(pollo.imagen, X, Y + movimiento); Y = Y+ movimiento; break;
+        case teclas.RIGTH: papel.drawImage(pollo.imagen, X + movimiento, Y); X = X + movimiento; break; 
+        case teclas.LEFTH: papel.drawImage(pollo.imagen, X - movimiento, Y); X = X - movimiento; break;
+        }
     }
 }
 function aleatorio(min, maxi)
@@ -68,5 +109,3 @@ function aleatorio(min, maxi)
     resultado = Math.floor(Math.random() * (maxi - min + 1 )) + min;
     return resultado;
 }
-var z = aleatorio(10, 20);
-
