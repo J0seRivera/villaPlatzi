@@ -1,7 +1,7 @@
 var vp = document.getElementById("villaplatzi");
 var papel = vp.getContext("2d");
-var cantidadVacas = aleatorio(1,10);
-var cantidadCerdos = aleatorio(1,10);
+var cantidadVacas = aleatorio(1,4);
+var cantidadCerdos = aleatorio(1,4);
 
 var teclas = 
 {
