@@ -72,10 +72,6 @@ function cargarPollo()
     dibujar();
 }
 
-/*function dibujarPollo(evento)
-{
-        
-}*/
 function dibujar(evento)
 {
     if (fondo.cargaOk) 
@@ -86,7 +82,6 @@ function dibujar(evento)
             var x = (aleatorio(0, 7) * 60);
             var y = (aleatorio(0, 7) * 60);
             papel.drawImage(vaca.imagen, x, y);
-            
         }
         for (i = 0 ; i < cantidadCerdos; i ++)
         {
